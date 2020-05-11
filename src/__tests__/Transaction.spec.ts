@@ -39,20 +39,20 @@ describe('Transaction', () => {
         expect.objectContaining({
           id: expect.any(String),
           title: 'Salary',
-          value: 3000,
           type: 'income',
+          value: 3000,
         }),
         expect.objectContaining({
           id: expect.any(String),
           title: 'Bicycle',
-          value: 1500,
           type: 'outcome',
+          value: 1500,
         }),
         expect.objectContaining({
           id: expect.any(String),
           title: 'Loan',
-          value: 1200,
           type: 'income',
+          value: 1200,
         }),
       ]),
     );
@@ -68,7 +68,7 @@ describe('Transaction', () => {
     const response = await request(app).post('/transactions').send({
       title: 'Bicycle',
       type: 'outcome',
-      value: 20000,
+      value: 3000,
     });
 
     expect(response.status).toBe(400);

@@ -1,10 +1,10 @@
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import Transaction from '../models/Transaction';
 
-interface RequestDTO {
+interface RequestDTO{
   title: string;
-  type: 'income' | 'outcome';
-  value: number;
+  value:number;
+  type:'income'|'outcome'
 }
 
 class CreateTransactionService {
@@ -14,22 +14,9 @@ class CreateTransactionService {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public execute({ title, value, type }: RequestDTO): Transaction {
-
-    if (type === 'outcome') {
-      const balance = this.transactionsRepository.getBalance();
-      if (value > balance.total) {
-        throw Error('Value passed is bigger then balance value');
-      }
-    }
-
-    const transaction = this.transactionsRepository.create({
-      title,
-      type,
-      value
-    });
-
-    return transaction;
+  public execute(dados:RequestDTO): Transaction {
+    const transaction = new Transaction(dados);
+    return this.transactionsRepository.create(transaction);
   }
 }
 
